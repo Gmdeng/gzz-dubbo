@@ -1,0 +1,44 @@
+server:
+  port: 12001  #8763
+  max-http-header-size: 4048576  # 解决数据量过大时报错
+spring:
+  application:
+    name: member-service
+  output:
+    ansi:
+      enabled: ALWAYS  #NEVER: 禁用, DETECT会检查终端是否支持ANSI，是的话就采用彩色输出（推荐项）, ALWAYS：总是使用
+# dubbo config
+# 应用定义了提供方应用信息，用于计算依赖关系；在dubbo-admin或dubbo-monitor会显示这个名字，方便辩识
+dubbo:
+  appliaction:
+    name: dubbo-provider
+  # 应用所属者
+  owner: Ricky
+  # 应用所属组织
+  organization: G-m@studio
+
+  # 使用zookeeper 注册中心暴露服务，注意要先开启zookeeper
+  registry:
+    # 注册中心ID
+    id: zookeeper-registry
+    # 注册中心协议
+    protocol: zookeeper
+    # 注册中心地址和端口
+    address: 127.0.0.1:2181
+  # dubbo协议在20880端口暴露服务
+  protocol:
+    # 协议名称
+    name: dubbo
+    # 协议端口
+    port: 20880
+    # 协议访问日志
+    accesslog: dubbo-p-access.log
+  # 服务
+  provider:
+    # 重试次数
+    retries: 0
+    # 超时时间
+    timeout: 3000
+  # 注册监控中心
+  monitor:
+    protocol: registry
